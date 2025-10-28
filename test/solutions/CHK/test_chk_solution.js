@@ -13,8 +13,8 @@ describe("CHK challenge: supermarket checkout", function () {
 		assert.equal(new CheckoutSolution().checkout("-"), -1);
 	});
 
-	it("allows string with at least one valid SKU character", function () {
-		assert.equal(new CheckoutSolution().checkout("A-"), 50);
+	it("does not allow strings with at least one invalid SKU character", function () {
+		assert.equal(new CheckoutSolution().checkout("A-"), -1);
 	});
 
 	it("correctly calculates total price for unit costs", function () {
@@ -34,6 +34,3 @@ describe("CHK challenge: supermarket checkout", function () {
 		assert.equal(new CheckoutSolution().checkout("AAAAABBCD"), 280);
 	});
 });
-
-
-

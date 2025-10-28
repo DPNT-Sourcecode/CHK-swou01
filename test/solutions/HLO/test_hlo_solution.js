@@ -13,4 +13,3 @@ describe("HLO challenge: greeting the world", function () {
 		assert.equal(new HelloSolution().hello(), "Hello, World!");
 	});
 });
-
