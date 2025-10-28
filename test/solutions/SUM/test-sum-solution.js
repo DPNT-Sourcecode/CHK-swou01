@@ -9,4 +9,3 @@ describe("SUM challenge: adding two numbers", function () {
 		assert.equal(new SumSolution().compute(1, 2), 3);
 	});
 });
-
