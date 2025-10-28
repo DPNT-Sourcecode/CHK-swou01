@@ -23,7 +23,8 @@ describe("CHK challenge: supermarket checkout", function () {
 		assert.equal(new CheckoutSolution().checkout("AAAAA"), 200);
 
 		// Mixed case: 5 A's + 2 B's + 1 C + 1 D
-		assert.equal(new CheckoutSolution().checkout("AAAAABBBD"), 280);
+		assert.equal(new CheckoutSolution().checkout("AAAAABBCD"), 280);
 	});
 });
+
 
