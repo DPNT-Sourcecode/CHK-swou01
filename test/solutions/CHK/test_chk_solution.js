@@ -37,6 +37,15 @@ describe("CHK challenge: supermarket checkout", function () {
 	it("handles empty string input", function () {
 		assert.equal(new CheckoutSolution().checkout(""), 0);
 	});
+
+	it("applies free item offers correctly", function () {
+		// Buy 2 E's and get 1 B free: E(40) + E(40) + B(0) = 80
+		assert.equal(new CheckoutSolution().checkout("EEB"), 80);
+
+		// Buy 4 E's and get 2 B's free: E(40) + E(40) + E(40) + E(40) + B(0) + B(0) = 160
+		assert.equal(new CheckoutSolution().checkout("EEEEBB"), 160);
+	});
 });
+
 
 
