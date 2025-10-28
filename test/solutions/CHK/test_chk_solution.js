@@ -83,6 +83,3 @@ describe("CHK challenge: supermarket checkout", function () {
 		});
 	});
 });
-
-
-
