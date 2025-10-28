@@ -2,6 +2,7 @@ var mocha = require("mocha");
 var describe = mocha.describe;
 var it = mocha.it;
 var assert = require("assert");
+const HelloSolution = require("../../../lib/solutions/HLO/hello_solution");
 
 describe("HLO challenge: greeting the world", function () {
 	it("should return a custom greeting message if a name is provided", function () {
@@ -12,3 +13,4 @@ describe("HLO challenge: greeting the world", function () {
 		assert.equal(new HelloSolution().hello(), "Hello, World!");
 	});
 });
+
