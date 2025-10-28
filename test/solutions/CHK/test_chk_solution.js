@@ -33,5 +33,10 @@ describe("CHK challenge: supermarket checkout", function () {
 		// Mixed case: 5 A's + 2 B's + 1 C + 1 D
 		assert.equal(new CheckoutSolution().checkout("AAAAABBCD"), 310);
 	});
+
+	it("handles empty string input", function () {
+		assert.equal(new CheckoutSolution().checkout(""), 0);
+	});
 });
+
 
