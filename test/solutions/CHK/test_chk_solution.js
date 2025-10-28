@@ -48,6 +48,12 @@ describe("CHK challenge: supermarket checkout", function () {
 		it("applies F → F free correctly for 3 Fs", function () {
 			assert.equal(checkout.checkout("FFF"), 20); // 2 charged, 1 free
 		});
+
+		it("does not give free F if fewer than 3 in basket", function () {
+			// Buy 2 Fs → free item requires 3, so no free F
+			// Total = 2 * 10 = 20
+			assert.equal(new CheckoutSolution().checkout("FF"), 20);
+		});
 	});
 
 	describe("Overlapping bulk offers", function () {
@@ -58,4 +64,5 @@ describe("CHK challenge: supermarket checkout", function () {
 		});
 	});
 });
+
 
