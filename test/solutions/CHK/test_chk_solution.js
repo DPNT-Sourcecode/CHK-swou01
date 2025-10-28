@@ -63,6 +63,20 @@ describe("CHK challenge: supermarket checkout", function () {
 			assert.equal(checkout.checkout("AAAAAAAA"), 330); // 8 A's
 		});
 	});
+
+	describe("Group offers", function () {
+		it("applies group offer for S, T, X, Y, Z correctly", function () {
+			// S(20) + T(20) + X(17) = 57 → group offer price = 45
+			assert.equal(checkout.checkout("STX"), 45);
+
+			// S(20) + T(20) + X(17) + Y(20) = 77
+			// Apply group offer once (3 items for 45), remaining Y(20) + Z(21)
+			// Total = 45 + 20 + 21 = 86
+			assert.equal(checkout.checkout("STXYZ"), 82);
+
+			// 2 * S(20) + 2 * T(20) + 2 * X(17) = 114
+			// Apply group offer twice (6 items for 90)
+			assert.equal(checkout.checkout("SSTTXX"), 90);
+		});
+	});
 });
-
-
