@@ -44,6 +44,10 @@ describe("CHK challenge: supermarket checkout", function () {
 			assert.equal(checkout.checkout("EEB"), 80); // 2 E + 1 free B
 			assert.equal(checkout.checkout("EEEEBB"), 160); // 4 E + 2 free B
 		});
+
+		it("applies F → F free correctly for 3 Fs", function () {
+			assert.equal(checkout.checkout("FFF"), 20); // 2 charged, 1 free
+		});
 	});
 
 	describe("Overlapping bulk offers", function () {
@@ -54,3 +58,4 @@ describe("CHK challenge: supermarket checkout", function () {
 		});
 	});
 });
+
