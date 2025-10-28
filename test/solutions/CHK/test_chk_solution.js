@@ -45,7 +45,19 @@ describe("CHK challenge: supermarket checkout", function () {
 		// Buy 4 E's and get 2 B's free: E(40) + E(40) + E(40) + E(40) + B(0) + B(0) = 160
 		assert.equal(new CheckoutSolution().checkout("EEEEBB"), 160);
 	});
+
+	it("applies overlapping bulk offers correctly", function () {
+		// Buy 6 A's
+		assert.equal(new CheckoutSolution().checkout("AAAAAA"), 260);
+
+		// Buy 7 A's
+		assert.equal(new CheckoutSolution().checkout("AAAAAAA"), 300);
+
+		// Buy 8 A's
+		assert.equal(new CheckoutSolution().checkout("AAAAAAAA"), 330);
+	});
 });
+
 
 
 
