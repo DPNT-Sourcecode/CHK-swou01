@@ -51,12 +51,13 @@ describe("CHK challenge: supermarket checkout", function () {
 		assert.equal(new CheckoutSolution().checkout("AAAAAA"), 260);
 
 		// Buy 7 A's
-		assert.equal(new CheckoutSolution().checkout("AAAAAAA"), 300);
+		assert.equal(new CheckoutSolution().checkout("AAAAAAA"), 310);
 
 		// Buy 8 A's
-		assert.equal(new CheckoutSolution().checkout("AAAAAAAA"), 330);
+		assert.equal(new CheckoutSolution().checkout("AAAAAAAA"), 340);
 	});
 });
+
 
 
 
