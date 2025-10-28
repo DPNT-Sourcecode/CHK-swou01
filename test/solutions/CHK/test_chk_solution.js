@@ -27,8 +27,8 @@ describe("CHK challenge: supermarket checkout", function () {
 		// 3 A's for 130 instead of 150
 		assert.equal(new CheckoutSolution().checkout("AAA"), 130);
 
-		// 5 A's for 230 instead of 250: 3 for 130 + 2 at 50 each
-		assert.equal(new CheckoutSolution().checkout("AAAAA"), 230);
+		// 5 A's for 200
+		assert.equal(new CheckoutSolution().checkout("AAAAA"), 200);
 
 		// Mixed case: 5 A's + 2 B's + 1 C + 1 D
 		assert.equal(new CheckoutSolution().checkout("AAAAABBCD"), 310);
@@ -57,6 +57,7 @@ describe("CHK challenge: supermarket checkout", function () {
 		assert.equal(new CheckoutSolution().checkout("AAAAAAAA"), 340);
 	});
 });
+
 
 
 
