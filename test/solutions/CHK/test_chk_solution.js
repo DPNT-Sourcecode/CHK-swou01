@@ -5,8 +5,16 @@ var assert = require("assert");
 const CheckoutSolution = require("../../../lib/solutions/CHK/checkout_solution");
 
 describe("CHK challenge: supermarket checkout", function () {
-	it("returns -1 for invalid input", function () {
+	it("returns -1 for invalid input type", function () {
 		assert.equal(new CheckoutSolution().checkout(0), -1);
+	});
+
+	it("returns -1 for invalid SKU characters", function () {
+		assert.equal(new CheckoutSolution().checkout("-"), -1);
+	});
+
+	it("allows string with at least one valid SKU character", function () {
+		assert.equal(new CheckoutSolution().checkout("A-"), 50);
 	});
 
 	it("correctly calculates total price for unit costs", function () {
@@ -26,5 +34,6 @@ describe("CHK challenge: supermarket checkout", function () {
 		assert.equal(new CheckoutSolution().checkout("AAAAABBCD"), 280);
 	});
 });
+
 
 
