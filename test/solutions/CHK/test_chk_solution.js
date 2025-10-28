@@ -5,61 +5,52 @@ var assert = require("assert");
 const CheckoutSolution = require("../../../lib/solutions/CHK/checkout_solution");
 
 describe("CHK challenge: supermarket checkout", function () {
-	it("returns -1 for invalid input type", function () {
-		assert.equal(new CheckoutSolution().checkout(0), -1);
+	const checkout = new CheckoutSolution();
+	describe("Input validation", function () {
+		it("returns -1 for non-string input", function () {
+			assert.equal(checkout.checkout(0), -1);
+		});
+
+		it("returns -1 for completely invalid SKU string", function () {
+			assert.equal(checkout.checkout("-"), -1);
+		});
+
+		it("returns -1 if string contains at least one invalid SKU", function () {
+			assert.equal(checkout.checkout("A-"), -1);
+		});
 	});
 
-	it("returns -1 for invalid SKU characters", function () {
-		assert.equal(new CheckoutSolution().checkout("-"), -1);
+	describe("Basic pricing", function () {
+		it("calculates total price for single units", function () {
+			// A(50) + B(30) + C(20) + D(15) = 115
+			assert.equal(checkout.checkout("ABCD"), 50 + 30 + 20 + 15);
+		});
+
+		it("returns 0 for empty string input", function () {
+			assert.equal(checkout.checkout(""), 0);
+		});
 	});
 
-	it("does not allow strings with at least one invalid SKU character", function () {
-		assert.equal(new CheckoutSolution().checkout("A-"), -1);
+	describe("Special offers", function () {
+		it("applies bulk offers correctly for A and B", function () {
+			assert.equal(checkout.checkout("AAA"), 130); // 3-for-130
+			assert.equal(checkout.checkout("AAAAA"), 200); // 5-for-200
+			assert.equal(checkout.checkout("AAAAABBCD"), 280); // Mixed units with offers
+		});
 	});
 
-	it("correctly calculates total price for unit costs", function () {
-		// the sum of A(50) + B(30) + C(20) + D(15) = 115
-		const singleUnitTotal = 50 + 30 + 20 + 15;
-		assert.equal(new CheckoutSolution().checkout("ABCD"), singleUnitTotal);
+	describe("Free item offers", function () {
+		it("applies E -> B free offers correctly", function () {
+			assert.equal(checkout.checkout("EEB"), 80); // 2 E + 1 free B
+			assert.equal(checkout.checkout("EEEEBB"), 160); // 4 E + 2 free B
+		});
 	});
 
-	it("applies special offers correctly", function () {
-		// 3 A's for 130 instead of 150
-		assert.equal(new CheckoutSolution().checkout("AAA"), 130);
-
-		// 5 A's for 200
-		assert.equal(new CheckoutSolution().checkout("AAAAA"), 200);
-
-		// Mixed case: 5 A's + 2 B's + 1 C + 1 D
-		assert.equal(new CheckoutSolution().checkout("AAAAABBCD"), 310);
-	});
-
-	it("handles empty string input", function () {
-		assert.equal(new CheckoutSolution().checkout(""), 0);
-	});
-
-	it("applies free item offers correctly", function () {
-		// Buy 2 E's and get 1 B free: E(40) + E(40) + B(0) = 80
-		assert.equal(new CheckoutSolution().checkout("EEB"), 80);
-
-		// Buy 4 E's and get 2 B's free: E(40) + E(40) + E(40) + E(40) + B(0) + B(0) = 160
-		assert.equal(new CheckoutSolution().checkout("EEEEBB"), 160);
-	});
-
-	it("applies overlapping bulk offers correctly", function () {
-		// Buy 6 A's
-		assert.equal(new CheckoutSolution().checkout("AAAAAA"), 260);
-
-		// Buy 7 A's
-		assert.equal(new CheckoutSolution().checkout("AAAAAAA"), 310);
-
-		// Buy 8 A's
-		assert.equal(new CheckoutSolution().checkout("AAAAAAAA"), 340);
+	describe("Overlapping bulk offers", function () {
+		it("calculates optimal total for multiple A's with overlapping offers", function () {
+			assert.equal(checkout.checkout("AAAAAA"), 250); // 6 A's
+			assert.equal(checkout.checkout("AAAAAAA"), 300); // 7 A's
+			assert.equal(checkout.checkout("AAAAAAAA"), 330); // 8 A's
+		});
 	});
 });
-
-
-
-
-
-
