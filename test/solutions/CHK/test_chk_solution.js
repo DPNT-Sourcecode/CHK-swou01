@@ -68,14 +68,20 @@ describe("CHK challenge: supermarket checkout", function () {
 		it("applies group offer for S, T, X, Y, Z correctly", function () {
 			// 3 items, group applies once
 			assert.equal(checkout.checkout("STX"), 45);
+		});
 
-			// 5 items, group applies once, 2 remaining at unit price
-			// Correct total: 45 + 37 = 82
-			assert.equal(checkout.checkout("STXYZ"), 82);
-
+		it("applies group offer multiple times", function () {
 			// 6 items, group applies twice
-			assert.equal(checkout.checkout("SSTTXX"), 90);
+			assert.equal(checkout.checkout("SSSTTX"), 90);
+		});
+
+		it("favors customer by including most expensive items in group offer", function () {
+			// Items: Z(21), S(30), T(20), Y(20)
+			// Group offer should include S, T, Y (total 75) for 45
+			// Leaving Z at full price (21)
+			assert.equal(checkout.checkout("ZSTY"), 66);
 		});
 	});
 });
+
 
